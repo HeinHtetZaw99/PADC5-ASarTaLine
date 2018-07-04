@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ASarTaLine</string>
+    <string name="title_activity_food_details">FoodDetailsActivity</string>
+    <string name="lorem">Spaghetti (Italian pronunciation: [spaˈɡetti]) </string>
+    <string name="mont_hin_gar">Mont Hin Gar</string>
+    <string name="taste">Taste</string>
+</resources>

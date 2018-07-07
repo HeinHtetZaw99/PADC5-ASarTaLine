@@ -1,17 +1,20 @@
-package com.daniel.user.asartaline.data.VOs;
+package com.daniel.user.asartaline.data.VOs.GetWarDee;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
+
 
 @Entity(tableName = "general_taste", indices = {@Index(value = "warDeeId")},
         foreignKeys = {@ForeignKey(entity = WarDeeVO.class, parentColumns = "warDeeId", childColumns = "warDeeId")})
 public class GeneralTasteVO {
 
     @PrimaryKey
+    @NonNull
     @SerializedName("tasteId")
     private String tasteId;
 

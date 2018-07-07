@@ -1,27 +1,28 @@
-package com.daniel.user.asartaline.data.VOs;
+package com.daniel.user.asartaline.data.VOs.GetWarDee;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@Entity(tableName = "shop_by_distance", indices = {@Index(value = "warDeeId")},
+@Entity(tableName = "shop_by_popularity", indices = {@Index(value = "warDeeId")},
         foreignKeys = {@ForeignKey(entity = WarDeeVO.class, parentColumns = "warDeeId", childColumns = "warDeeId")})
-public class ShopByDistanceVO {
+public class ShopByPopularityVO {
+    @NonNull
     @PrimaryKey
-    @SerializedName("shopByDistanceId")
+    @SerializedName("shopByPopularityId")
     private String shopId;
 
+    private String warDeeId;
     @Ignore
     @SerializedName("mealShop")
     private List<MealShopVO> mealShop;
-
-    private String warDeeId;
 
     public String getWarDeeId() {
         return warDeeId;

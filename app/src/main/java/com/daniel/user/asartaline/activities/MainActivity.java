@@ -1,18 +1,25 @@
 package com.daniel.user.asartaline.activities;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 
+import com.daniel.user.asartaline.ASarTaLineApp;
 import com.daniel.user.asartaline.R;
 import com.daniel.user.asartaline.adapters.FoodAdapter;
 import com.daniel.user.asartaline.components.SmartRecyclerView;
 import com.daniel.user.asartaline.components.SmartScrollListener;
+import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
 import com.daniel.user.asartaline.mvp.presenters.MainPresenter;
 import com.daniel.user.asartaline.mvp.views.MainView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +54,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
         });
         rvFood.addOnScrollListener(mSmartScrollListener);
+
+        mPresenter.getWarDeeLD().observe(this, new Observer<List<WarDeeVO>>() {
+            @Override
+            public void onChanged(@Nullable List<WarDeeVO> warDeeVOS) {
+                Log.d(ASarTaLineApp.LOG_TAG, "Livedata reached");
+            }
+        });
 
         if (mSearchPanel.isAttachedToWindow()) {
             mSearchPanel.setCardBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));

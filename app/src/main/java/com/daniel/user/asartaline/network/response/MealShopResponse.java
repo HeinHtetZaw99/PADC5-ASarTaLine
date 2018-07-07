@@ -1,16 +1,16 @@
 package com.daniel.user.asartaline.network.response;
 
-import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
+import com.daniel.user.asartaline.data.VOs.GetShopList.ShopVO;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class WarDeeResponse {
+public class MealShopResponse {
     private int code;
     private String message;
-    private int apiVersion;
-    @SerializedName("astlWarDee")
-    private List<WarDeeVO> warDeeVO;
+    private String apiVersion;
+    @SerializedName("astlMealShop")
+    private List<ShopVO> shops;
 
     public int getCode() {
         return code;
@@ -28,19 +28,19 @@ public class WarDeeResponse {
         this.message = message;
     }
 
-    public int getApiVersion() {
+    public String getApiVersion() {
         return apiVersion;
     }
 
-    public void setApiVersion(int apiVersion) {
+    public void setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
     }
 
-    public List<WarDeeVO> getWarDeeVO() {
-        return warDeeVO;
+    public List<ShopVO> getShops() {
+        return shops;
     }
 
-    public void setWarDeeVO(List<WarDeeVO> warDeeVO) {
-        this.warDeeVO = warDeeVO;
+    public void setShops(List<ShopVO> shops) {
+        this.shops = shops;
     }
 }

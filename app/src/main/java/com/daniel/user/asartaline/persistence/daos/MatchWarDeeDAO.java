@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.daniel.user.asartaline.data.VOs.MatchWarTeeVO;
+import com.daniel.user.asartaline.data.VOs.GetWarDee.MatchWarTeeVO;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ public interface MatchWarDeeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertMatchWarDee(MatchWarTeeVO... matchWarTeeLists);
 
-    @Query("SELECT * FROM match_war_tee WHERE warDeeId = :warDeeId")
+    @Query("SELECT * FROM match_war_tee WHERE matchWarDeeId = :warDeeId")
     MatchWarTeeVO getMatchWarDeeById(String warDeeId);
 
-    @Query("SELECT * FROM match_war_tee WHERE warDeeId = :warDeeId")
+    @Query("SELECT * FROM match_war_tee WHERE matchWarDeeId = :warDeeId")
     LiveData<List<MatchWarTeeVO>> getMatchWarDeeLDById(String warDeeId);
 }

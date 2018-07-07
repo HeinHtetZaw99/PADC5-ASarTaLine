@@ -1,16 +1,23 @@
-package com.daniel.user.asartaline.data.VOs;
+package com.daniel.user.asartaline.data.VOs.GetWarDee;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
 
+import com.daniel.user.asartaline.persistence.typeconvertors.WarDeeImagesTypeConvertor;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+
 @Entity(tableName = "war_dee")
+@TypeConverters(WarDeeImagesTypeConvertor.class)
 public class WarDeeVO {
+
     @PrimaryKey
+    @NonNull
     @SerializedName("warDeeId")
     private String warDeeId;
 
@@ -19,7 +26,7 @@ public class WarDeeVO {
 
 
     @SerializedName("images")
-    private String[] images;
+    private List<String> images;
 
     @Ignore
     @SerializedName("generalTaste")
@@ -63,11 +70,11 @@ public class WarDeeVO {
         this.warTeeName = warTeeName;
     }
 
-    public String[] getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(String[] images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 

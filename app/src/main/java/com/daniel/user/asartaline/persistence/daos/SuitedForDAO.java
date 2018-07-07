@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.daniel.user.asartaline.data.VOs.SuitedForVO;
+import com.daniel.user.asartaline.data.VOs.GetWarDee.SuitedForVO;
 
 import java.util.List;
 

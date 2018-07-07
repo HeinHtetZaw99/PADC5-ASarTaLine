@@ -3,6 +3,7 @@ package com.daniel.user.asartaline.data.models;
 import android.content.Context;
 
 import com.daniel.user.asartaline.network.WarDeeAPI;
+import com.daniel.user.asartaline.persistence.WarDeeDB;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseModel {
     protected WarDeeAPI theApi;
+    protected WarDeeDB warDeeDB;
 
     protected BaseModel(Context context) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -21,12 +23,13 @@ public class BaseModel {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://padcmyanmar.com/padc-2/asartaline/api/")
+                .baseUrl("http://padcmyanmar.com/padc-2/asartaline/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
 
         theApi = retrofit.create(WarDeeAPI.class);
+        warDeeDB = WarDeeDB.getWarDeeDataBase(context);
     }
 }

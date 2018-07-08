@@ -19,7 +19,7 @@ public interface GeneralTasteDAO {
     List<GeneralTasteVO> getAllTastes();
 
     @Query("SELECT * FROM general_taste WHERE tasteId = :tasteId")
-    GeneralTasteVO getTasteById(String tasteId);
+    List<GeneralTasteVO> getTasteById(String tasteId);
 
     @Query("SELECT * FROM general_taste WHERE tasteId = :tasteId")
     LiveData<List<GeneralTasteVO>> getTasteLDById(String tasteId);

@@ -5,7 +5,7 @@
     android:layout_margin="@dimen/padding_small"
     android:layout_marginTop="@dimen/padding_small"
     android:background="@drawable/rating_view"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/padding_small">
 
     <LinearLayout
@@ -13,28 +13,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_medium"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_medium"
-        android:weightSum="3">
+        android:orientation="vertical"
+        android:paddingStart="@dimen/padding_medium">
 
         <org.mmtextview.components.MMTextView
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/taste"
             android:textColor="@color/colorBlack"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <org.mmtextview.components.MMTextView
             android:id="@+id/food_details_taste"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+
             android:lineSpacingMultiplier="1.2"
             android:padding="@dimen/padding_small"
-            android:text="@string/lorem"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            tools:text="@string/lorem"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -45,28 +43,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/taste"
         android:layout_marginTop="@dimen/padding_medium"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_medium"
-        android:weightSum="3">
+        android:orientation="vertical"
+        android:paddingStart="@dimen/padding_medium">
 
         <org.mmtextview.components.MMTextView
-            android:id="@+id/food_details_taste_desc"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Taste Desc"
             android:textColor="@color/colorBlack"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <org.mmtextview.components.MMTextView
-            android:id="@+id/food_details_suited"
-            android:layout_width="wrap_content"
+            android:id="@+id/food_details_taste_desc"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:padding="@dimen/padding_small"
-            android:text="@string/lorem"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            tools:text="@string/lorem"
             android:textStyle="normal" />
 
     </LinearLayout>
@@ -77,26 +71,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tasteDesc"
         android:layout_marginTop="@dimen/padding_medium"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/padding_medium"
-        android:weightSum="3">
+        android:orientation="vertical"
+        android:paddingStart="@dimen/padding_medium">
 
         <org.mmtextview.components.MMTextView
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Suites With"
             android:textColor="@color/colorBlack"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <org.mmtextview.components.MMTextView
-            android:layout_width="wrap_content"
+            android:id="@+id/food_details_suited"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:padding="@dimen/padding_small"
-            android:text="@string/lorem"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            tools:text="@string/lorem"
             android:textStyle="normal" />
 
     </LinearLayout>

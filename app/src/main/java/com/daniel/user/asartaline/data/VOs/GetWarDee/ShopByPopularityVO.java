@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 @Entity(tableName = "shop_by_popularity")
 public class ShopByPopularityVO {
     @NonNull
@@ -18,7 +16,7 @@ public class ShopByPopularityVO {
 
     @Ignore
     @SerializedName("mealShop")
-    private List<MealShopVO> mealShop;
+    private MealShopVO mealShop;
 
 
     public String getShopId() {
@@ -29,11 +27,11 @@ public class ShopByPopularityVO {
         this.shopId = shopId;
     }
 
-    public List<MealShopVO> getMealShop() {
+    public MealShopVO getMealShop() {
         return mealShop;
     }
 
-    public void setMealShop(List<MealShopVO> mealShop) {
+    public void setMealShop(MealShopVO mealShop) {
         this.mealShop = mealShop;
     }
 }

@@ -18,8 +18,8 @@ public interface SuitedForDAO {
     @Query("SELECT * FROM suited_for")
     List<SuitedForVO> getAllSuitedItems();
 
-    @Query("SELECT * FROM suited_for WHERE suitedForId = :id")
-    SuitedForVO getSuitedItemsById(String id);
+    @Query("SELECT * FROM suited_for WHERE warDeeId = :id")
+    List<SuitedForVO> getSuitedItemsById(String id);
 
     @Query("SELECT * FROM suited_for WHERE suitedForId = :id")
     LiveData<List<SuitedForVO>> getSuitedItemsLDById(String id);

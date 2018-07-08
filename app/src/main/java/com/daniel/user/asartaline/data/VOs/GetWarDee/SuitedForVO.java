@@ -21,6 +21,16 @@ public class SuitedForVO {
     @SerializedName("suitedForDesc")
     private String suitedForDesc;
 
+    private String warDeeId;
+
+    public String getWarDeeId() {
+        return warDeeId;
+    }
+
+    public void setWarDeeId(String warDeeId) {
+        this.warDeeId = warDeeId;
+    }
+
     public String getSuitedForId() {
         return suitedForId;
     }

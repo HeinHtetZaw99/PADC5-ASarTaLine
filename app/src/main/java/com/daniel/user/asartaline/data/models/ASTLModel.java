@@ -3,6 +3,7 @@ package com.daniel.user.asartaline.data.models;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.daniel.user.asartaline.ASarTaLineApp;
@@ -59,19 +60,22 @@ public class ASTLModel extends BaseModel {
         Log.d(ASarTaLineApp.LOG_TAG, " Reached in start loading ");
         theApi.loadShops(ACCESS_TOKEN)
                 .subscribeOn(Schedulers.io())
-                .flatMap((Function<MealShopResponse, ObservableSource<WarDeeResponse>>) mealShopResponse -> {
+                .flatMap(new Function<MealShopResponse, ObservableSource<WarDeeResponse>>() {
+                    @Override
+                    public ObservableSource<WarDeeResponse> apply(MealShopResponse mealShopResponse) {
 
-                    if (mealShopResponse != null && mealShopResponse.getShops().size() > 0) {
-                        saveMealShopsInDB(mealShopResponse.getShops());
-                        shopVOS.addAll(mealShopResponse.getShops());
+                        if (mealShopResponse != null && mealShopResponse.getShops().size() > 0) {
+                            ASTLModel.this.saveMealShopsInDB(mealShopResponse.getShops());
+                            shopVOS.addAll(mealShopResponse.getShops());
 
-                    } else {
-                        errorLD.setValue("Error in Loading WarDee List");
+                        } else {
+                            errorLD.setValue("Error in Loading WarDee List");
 
-                        Log.d(ASarTaLineApp.LOG_TAG, " Reached in start loading  error");
+                            Log.d(ASarTaLineApp.LOG_TAG, " Reached in start loading  error");
+                        }
+
+                        return theApi.loadWarDees(ACCESS_TOKEN);
                     }
-
-                    return theApi.loadWarDees(ACCESS_TOKEN);
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WarDeeResponse>() {
@@ -142,6 +146,7 @@ public class ASTLModel extends BaseModel {
             }
             for (SuitedForVO suitedFor : food.getSuitedFor()) {
                 suitedFor.setSuitedFor(food.getWarDeeId());
+                suitedFor.setWarDeeId(food.getWarDeeId());
                 suitedForVOS.add(suitedFor);
             }
             for (MatchWarTeeVO matchWarDee : food.getMatchWarTees()) {
@@ -149,20 +154,19 @@ public class ASTLModel extends BaseModel {
                 matchWarTeeVOS.add(matchWarDee);
             }
             for (ShopByDistanceVO shopByDistance : food.getShopByDistance()) {
-                mealShopVOS.addAll(shopByDistance.getMealShop());
+                mealShopVOS.add(shopByDistance.getMealShop());
 
 //                shopByDistance.setWarDeeId(food.getWarDeeId());
                 shopByDistanceVOS.add(shopByDistance);
             }
             for (ShopByPopularityVO shopByPopularity : food.getShopByPopularity()) {
-                mealShopVOS.addAll(shopByPopularity.getMealShop());
+                mealShopVOS.add(shopByPopularity.getMealShop());
 
 //                shopByPopularity.setWarDeeId(food.getWarDeeId());
                 shopByPopularityVOS.add(shopByPopularity);
             }
             warDeeVOS.add(food);
         }
-
         long[] insertedGeneratedTaste = warDeeDB.GeneralTasteDAO().insertGeneralTaste(generalTasteVOS.toArray(new GeneralTasteVO[0]));
         Log.d("WarDee DB", "insertedGeneratedTaste : " + insertedGeneratedTaste);
 
@@ -181,9 +185,13 @@ public class ASTLModel extends BaseModel {
         long[] insertedMealShop = warDeeDB.MealShopDAO().insertMealShops(mealShopVOS.toArray(new MealShopVO[0]));
         Log.d("WarDee DB", "insertedMealShop : " + insertedMealShop);
 
-        long[] insertedFoods = warDeeDB.WarDeeDAO().insertWarDee(warDeeVOS.get(0));
-        Log.d("WarDee DB", "insertedFoods : " + insertedFoods);
+        for (WarDeeVO deeVO : warDeeVOSList) {
+            long[] insertedFoods = warDeeDB.WarDeeDAO().insertWarDee(deeVO);
+            Log.d("WarDee DB", "insertedFoods : " + insertedFoods);
+        }
         Log.d(ASarTaLineApp.LOG_TAG, "SAVED WARDEE LIST ");
+
+
     }
 
 
@@ -203,15 +211,14 @@ public class ASTLModel extends BaseModel {
 
     public LiveData<WarDeeVO> getWarDeeByIdLD(final String foodId) {
         final MutableLiveData<WarDeeVO> warDeeLD = new MutableLiveData<>();
-        warDeeDB.WarDeeDAO().getWarDeeLDById(foodId).observeForever(warDeeVO -> {
-            if (warDeeVO != null) {
-//                    for (ShopByDistanceVO shopByDistance : warDeeVO.getShopByDistance()) {
-//                        shopByDistance.setMealShop(warDeeDB.MealShopDAO().getMealShopById(shopByDistance.getShopId()));
-//                    }
-//                    for (ShopByPopularityVO shopByPopularity : warDeeVO.getShopByPopularity()) {
-//                        shopByPopularity.setMealShop(warDeeDB.MealShopDAO().getMealShopById(shopByPopularity.getShopId()));
-//                    }
-                warDeeLD.setValue(warDeeVO);
+        warDeeDB.WarDeeDAO().getWarDeeLDById(foodId).observeForever(new android.arch.lifecycle.Observer<WarDeeVO>() {
+            @Override
+            public void onChanged(@Nullable WarDeeVO warDeeVO) {
+                if (warDeeVO != null) {
+                    warDeeVO.setGeneralTaste(warDeeDB.GeneralTasteDAO().getTasteById(warDeeVO.getWarDeeId()));
+                    warDeeVO.setSuitedFor(warDeeDB.SuitedForDAO().getSuitedItemsById(warDeeVO.getWarDeeId()));
+                    warDeeLD.setValue(warDeeVO);
+                }
             }
         });
         return warDeeLD;

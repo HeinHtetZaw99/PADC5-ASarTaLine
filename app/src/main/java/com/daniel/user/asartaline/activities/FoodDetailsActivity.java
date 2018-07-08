@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.daniel.user.asartaline.ASarTaLineApp;
 import com.daniel.user.asartaline.R;
 import com.daniel.user.asartaline.adapters.FoodAdapter;
+import com.daniel.user.asartaline.data.VOs.GetWarDee.GeneralTasteVO;
 import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
 import com.daniel.user.asartaline.mvp.presenters.DetailsPresenter;
 import com.daniel.user.asartaline.mvp.views.DetailsView;
@@ -81,13 +82,17 @@ public class FoodDetailsActivity extends AppCompatActivity implements DetailsVie
     @Override
     public void displayData(WarDeeVO warDeeVO) {
         foodName.setText(warDeeVO.getWarTeeName());
-        foodPrice.setText(warDeeVO.getMinPrice() + " - " + warDeeVO.getMaxPrice());
-        if (warDeeVO.getGeneralTaste() != null && warDeeVO.getGeneralTaste().size() > 0) {
+        foodPrice.setText(warDeeVO.getMinPrice() + " - " + warDeeVO.getMaxPrice() + " MMK");
+        List<GeneralTasteVO> generalTasteVO = warDeeVO.getGeneralTaste();
+        if (generalTasteVO != null && generalTasteVO.size() > 0) {
 
-            foodTaste.setText(warDeeVO.getGeneralTaste().get(0).getTaste());
-            foodTasteDesc.setText(warDeeVO.getGeneralTaste().get(0).getTasteDesc());
+            foodTaste.setText(generalTasteVO.get(0).getTaste());
+            Log.d(ASarTaLineApp.LOG_TAG, generalTasteVO.get(0).getTaste());
+            Log.d(ASarTaLineApp.LOG_TAG, generalTasteVO.get(0).getTasteDesc());
+            foodTasteDesc.setText(generalTasteVO.get(0).getTasteDesc());
         }
         if (warDeeVO.getSuitedFor() != null && warDeeVO.getSuitedFor().size() > 0) {
+            Log.d(ASarTaLineApp.LOG_TAG, warDeeVO.getSuitedFor().get(0).getSuitedForDesc());
             foodSuited.setText(warDeeVO.getSuitedFor().get(0).getSuitedForDesc());
         }
         List<String> Images = warDeeVO.getImages();

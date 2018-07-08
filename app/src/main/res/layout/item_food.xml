@@ -48,30 +48,30 @@
                     android:orientation="vertical"
                     android:paddingStart="@dimen/padding_small">
 
-                    <TextView
+                    <org.mmtextview.components.MMTextView
                         android:id="@+id/food_name"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:maxLines="3"
                         android:text="Mont Hingar"
                         android:textColor="@color/colorBlack"
-                        android:textSize="25sp" />
+                        android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/food_origin"
+                    <org.mmtextview.components.MMTextView
+                        android:id="@+id/food_taste"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mont Hingar"
                         android:textColor="@color/colorBlack"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
 
-                    <TextView
+                    <org.mmtextview.components.MMTextView
                         android:id="@+id/food_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mont Hingar"
                         android:textColor="@color/colorBlack"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.daniel.user.asartaline.R;
+import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
 import com.daniel.user.asartaline.delegate.FoodItemDelegate;
 import com.daniel.user.asartaline.viewholders.FoodViewHolder;
 
-public class FoodAdapter extends BaseRecyclerAdapter<FoodViewHolder> {
+public class FoodAdapter extends BaseRecyclerAdapter<FoodViewHolder, WarDeeVO> {
+
     private FoodItemDelegate foodItemDelegate;
 
     public FoodAdapter(Context context, FoodItemDelegate foodItemDelegate) {
@@ -23,5 +25,6 @@ public class FoodAdapter extends BaseRecyclerAdapter<FoodViewHolder> {
         View view = mLayoutInflator.inflate(R.layout.item_food, parent, false);
         return new FoodViewHolder(view, foodItemDelegate);
     }
+
 }
 

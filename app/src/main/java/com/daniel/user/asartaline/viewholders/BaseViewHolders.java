@@ -5,12 +5,13 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
+public abstract class BaseViewHolders<W> extends RecyclerView.ViewHolder implements View.OnClickListener {
     public BaseViewHolders(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(this);
     }
-//    public abstract void setData(W data);
+
+    public abstract void setData(W data);
 
 }

@@ -28,7 +28,7 @@
                     android:orientation="horizontal"
                     android:weightSum="3">
 
-                    <TextView
+                    <org.mmtextview.components.MMTextView
                         android:id="@+id/foodDetailsName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -37,10 +37,10 @@
                         android:layout_weight="2"
                         android:text="@string/mont_hin_gar"
                         android:textColor="@color/colorBlack"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <org.mmtextview.components.MMTextView
                         android:id="@+id/food_details_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

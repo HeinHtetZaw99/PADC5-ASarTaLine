@@ -15,9 +15,9 @@ public interface MealShopDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long[] insertMealShops(MealShopVO... mealShopVOS);
 
-    @Query("SELECT * FROM meal_shop WHERE warDeeId = :warDeeId")
-    MealShopVO getMealShopById(String warDeeId);
+    @Query("SELECT * FROM meal_shop WHERE mealShopId = :shopId")
+    MealShopVO getMealShopById(String shopId);
 
-    @Query("SELECT * FROM meal_shop WHERE warDeeId = :warDeeId")
-    LiveData<List<MealShopVO>> getMealShopLDById(String warDeeId);
+    @Query("SELECT * FROM meal_shop WHERE mealShopId = :shopId")
+    LiveData<List<MealShopVO>> getMealShopLDById(String shopId);
 }

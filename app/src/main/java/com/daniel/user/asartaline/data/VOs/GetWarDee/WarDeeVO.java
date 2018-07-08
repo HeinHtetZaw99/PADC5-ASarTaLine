@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import com.daniel.user.asartaline.persistence.typeconvertors.WarDeeImagesTypeConvertor;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -87,6 +88,8 @@ public class WarDeeVO {
     }
 
     public List<SuitedForVO> getSuitedFor() {
+        if (suitedFor == null)
+            suitedFor = new ArrayList<>();
         return suitedFor;
     }
 
@@ -127,6 +130,7 @@ public class WarDeeVO {
     }
 
     public List<ShopByPopularityVO> getShopByPopularity() {
+
         return shopByPopularity;
     }
 

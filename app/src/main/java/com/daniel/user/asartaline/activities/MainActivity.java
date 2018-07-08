@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             @Override
             public void onChanged(@Nullable List<WarDeeVO> warDeeVOS) {
                 Log.d(ASarTaLineApp.LOG_TAG, "Livedata reached");
+                displayData(warDeeVOS);
             }
         });
 
@@ -67,9 +68,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
     }
 
+    private void displayData(List<WarDeeVO> warDeeVOList) {
+        mAdapter.appendNewData(warDeeVOList);
+    }
+
     @Override
-    public void launchFoodDetailsScreen() {
+    public void launchFoodDetailsScreen(String id) {
         Intent intent = new Intent(MainActivity.this, FoodDetailsActivity.class);
+        intent.putExtra("Id", id);
         startActivity(intent);
     }
 }

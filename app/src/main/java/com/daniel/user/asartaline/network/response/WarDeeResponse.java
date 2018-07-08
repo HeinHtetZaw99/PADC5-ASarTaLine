@@ -8,7 +8,7 @@ import java.util.List;
 public class WarDeeResponse {
     private int code;
     private String message;
-    private int apiVersion;
+    private String apiVersion;
     @SerializedName("astlWarDee")
     private List<WarDeeVO> warDeeVO;
 
@@ -28,11 +28,11 @@ public class WarDeeResponse {
         this.message = message;
     }
 
-    public int getApiVersion() {
+    public String getApiVersion() {
         return apiVersion;
     }
 
-    public void setApiVersion(int apiVersion) {
+    public void setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
     }
 

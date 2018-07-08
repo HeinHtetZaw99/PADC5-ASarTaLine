@@ -26,7 +26,7 @@ import com.daniel.user.asartaline.persistence.daos.WarDeeDAO;
 
 @Database(entities = {GeneralTasteVO.class, MatchWarTeeVO.class, MealShopVO.class,
         ShopByDistanceVO.class, ShopByPopularityVO.class, SuitedForVO.class, WarDeeVO.class, ShopVO.class, ReviewsVO.class},
-        version = 2, exportSchema = false)
+        version = 3, exportSchema = false)
 public abstract class WarDeeDB extends RoomDatabase {
     private static final String DB_NAME = "ASTL_DB";
     public static WarDeeDB INSTANCE;
@@ -35,6 +35,7 @@ public abstract class WarDeeDB extends RoomDatabase {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), WarDeeDB.class, DB_NAME)
                     .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return INSTANCE;

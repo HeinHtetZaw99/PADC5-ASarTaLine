@@ -18,9 +18,9 @@ public interface GeneralTasteDAO {
     @Query("SELECT * FROM general_taste")
     List<GeneralTasteVO> getAllTastes();
 
-    @Query("SELECT * FROM general_taste WHERE warDeeId = :warDeeId")
-    GeneralTasteVO getTasteById(String warDeeId);
+    @Query("SELECT * FROM general_taste WHERE tasteId = :tasteId")
+    GeneralTasteVO getTasteById(String tasteId);
 
-    @Query("SELECT * FROM general_taste WHERE warDeeId = :warDeeId")
-    LiveData<List<GeneralTasteVO>> getTasteLDById(String warDeeId);
+    @Query("SELECT * FROM general_taste WHERE tasteId = :tasteId")
+    LiveData<List<GeneralTasteVO>> getTasteLDById(String tasteId);
 }

@@ -18,8 +18,8 @@ public class MainPresenter extends BasePresenter<MainView> implements FoodItemDe
     private MutableLiveData<String> mErrorLD;
 
     @Override
-    public void onTapFoodItem() {
-        mView.launchFoodDetailsScreen();
+    public void onTapFoodItem(String id) {
+        mView.launchFoodDetailsScreen(id);
     }
 
     @Override

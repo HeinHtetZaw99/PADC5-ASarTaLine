@@ -22,5 +22,5 @@ public interface WarDeeDAO {
     WarDeeVO getWarDeeById(String warDeeId);
 
     @Query("SELECT * FROM war_dee WHERE warDeeId = :warDeeId")
-    LiveData<List<WarDeeVO>> getWarDeeLDById(String warDeeId);
+    LiveData<WarDeeVO> getWarDeeLDById(String warDeeId);
 }

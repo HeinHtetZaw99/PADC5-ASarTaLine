@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.daniel.user.asartaline.R;
+import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
 import com.daniel.user.asartaline.delegate.FoodItemDelegate;
 import com.daniel.user.asartaline.viewholders.SuggestionViewHolder;
 
-public class SuggestionAdapter extends BaseRecyclerAdapter<SuggestionViewHolder> {
+public class SuggestionAdapter extends BaseRecyclerAdapter<SuggestionViewHolder, WarDeeVO> {
     private FoodItemDelegate foodItemDelegate;
 
     public SuggestionAdapter(Context context, FoodItemDelegate foodItemDelegate) {

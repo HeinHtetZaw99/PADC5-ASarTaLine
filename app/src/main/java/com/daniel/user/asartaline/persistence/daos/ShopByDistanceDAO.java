@@ -18,9 +18,9 @@ public interface ShopByDistanceDAO {
     @Query("SELECT * FROM shop_by_distance")
     List<ShopByDistanceVO> getAllShops();
 
-    @Query("SELECT * FROM shop_by_distance WHERE warDeeId = :warDeeId")
-    ShopByDistanceVO getShopsById(String warDeeId);
+    @Query("SELECT * FROM shop_by_distance WHERE shopId = :shopId")
+    ShopByDistanceVO getShopsById(String shopId);
 
-    @Query("SELECT * FROM shop_by_distance WHERE warDeeId = :warDeeId")
-    LiveData<List<ShopByDistanceVO>> getShopsLDById(String warDeeId);
+    @Query("SELECT * FROM shop_by_distance WHERE shopId = :shopId")
+    LiveData<List<ShopByDistanceVO>> getShopsLDById(String shopId);
 }

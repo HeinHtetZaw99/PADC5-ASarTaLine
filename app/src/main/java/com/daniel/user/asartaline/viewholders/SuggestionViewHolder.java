@@ -16,4 +16,9 @@ public class SuggestionViewHolder extends BaseViewHolders {
     public void onClick(View v) {
 
     }
+
+    @Override
+    public void setData(Object data) {
+
+    }
 }

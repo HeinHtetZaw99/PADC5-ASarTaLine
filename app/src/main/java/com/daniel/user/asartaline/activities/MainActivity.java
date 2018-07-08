@@ -13,6 +13,7 @@ import android.util.Log;
 import com.daniel.user.asartaline.ASarTaLineApp;
 import com.daniel.user.asartaline.R;
 import com.daniel.user.asartaline.adapters.FoodAdapter;
+import com.daniel.user.asartaline.components.EmptyViewPod;
 import com.daniel.user.asartaline.components.SmartRecyclerView;
 import com.daniel.user.asartaline.components.SmartScrollListener;
 import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private SmartScrollListener mSmartScrollListener;
     private FoodAdapter mAdapter;
     private MainPresenter mPresenter;
+    @BindView(R.id.vp_empty_news)
+    EmptyViewPod emptyViewPod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         rvFood.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new FoodAdapter(this, mPresenter);
         rvFood.setAdapter(mAdapter);
+        rvFood.setEmptyView(emptyViewPod);
         mSmartScrollListener = new SmartScrollListener(new SmartScrollListener.OnSmartScrollListener() {
             @Override
             public void onListEndReach() {
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             @Override
             public void onChanged(@Nullable List<WarDeeVO> warDeeVOS) {
                 Log.d(ASarTaLineApp.LOG_TAG, "Livedata reached");
+
                 displayData(warDeeVOS);
             }
         });

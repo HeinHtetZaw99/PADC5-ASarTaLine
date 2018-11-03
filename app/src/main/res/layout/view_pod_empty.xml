@@ -16,10 +16,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_empty"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginTop="@dimen/padding_small"
         android:text="No Data To Display" />
 
     <TextView
+        android:id="@+id/tv_empty_pull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_empty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/padding_small"
+        android:text="Pull to Refresh Data" />
+
+    <!--<TextView
         android:id="@+id/btn_refresh_empty"
         style="@style/AccentButton"
         android:layout_width="wrap_content"
@@ -27,6 +36,7 @@
         android:layout_below="@id/tv_empty"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_medium"
-        android:text="Refresh" />
+        android:text="Refresh" /> !-->
+
 
 </com.daniel.user.asartaline.components.EmptyViewPod>

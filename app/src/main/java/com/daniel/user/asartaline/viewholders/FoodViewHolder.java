@@ -1,10 +1,13 @@
 package com.daniel.user.asartaline.viewholders;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.daniel.user.asartaline.R;
+import com.daniel.user.asartaline.components.UIUtils;
 import com.daniel.user.asartaline.data.VOs.GetWarDee.WarDeeVO;
 import com.daniel.user.asartaline.delegate.FoodItemDelegate;
 
@@ -33,12 +36,18 @@ public class FoodViewHolder extends BaseViewHolders<WarDeeVO> {
     }
 
 
+    @SuppressLint("CheckResult")
     @Override
     public void setData(WarDeeVO data) {
         warDeeVO = data;
+
+        RequestOptions options = new RequestOptions();
+        options.centerCrop();
         Glide.with(imageView)
+                .asBitmap()
+                .apply(options)
                 .load(data.getImages().get(0))
-                .into(imageView);
+                .into(UIUtils.getRoundedImageTarget(itemView.getContext(), imageView, 20.0f));
         foodName.setText(data.getWarTeeName());
         foodPrice.setText(data.getMinPrice() + " - " + data.getMaxPrice());
         foodTaste.setText(data.getGeneralTaste().get(0).getTaste());

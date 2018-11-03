@@ -3,17 +3,13 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/padding_small"
+
     app:cardBackgroundColor="@android:color/transparent"
     app:cardElevation="5dp">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        app:cardElevation="0dp">
+
 
 
         <LinearLayout
@@ -35,9 +31,11 @@
 
                 <ImageView
                     android:id="@+id/food_imgView"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_weight="1"
+                    android:layout_margin="@dimen/padding_small"
+
                     android:scaleType="fitXY"
                     android:src="@drawable/dummy_food_img" />
 
@@ -88,5 +86,4 @@
             android:text="4.9"
             android:textSize="25sp" />
 
-    </android.support.v7.widget.CardView>
 </android.support.v7.widget.CardView>

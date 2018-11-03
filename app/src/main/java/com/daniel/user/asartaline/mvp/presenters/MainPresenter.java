@@ -16,6 +16,7 @@ public class MainPresenter extends BasePresenter<MainView> implements FoodItemDe
     private MutableLiveData<List<WarDeeVO>> mWarDeeLD;
     private MutableLiveData<List<ShopVO>> mShopLD;
     private MutableLiveData<String> mErrorLD;
+    private boolean isOnline;
 
     @Override
     public void onTapFoodItem(String id) {
@@ -28,10 +29,22 @@ public class MainPresenter extends BasePresenter<MainView> implements FoodItemDe
         mWarDeeLD = new MutableLiveData<>();
         mShopLD = new MutableLiveData<>();
         mErrorLD = new MutableLiveData<>();
+        //ASTLModel.getInstance().startLoadingWarDeeList(mWarDeeLD, mShopLD, mErrorLD);
+        loadData();
+    }
+
+
+    public void onRefreshScreen() {
+        loadData();
+    }
+
+    private void loadData() {
         ASTLModel.getInstance().startLoadingWarDeeList(mWarDeeLD, mShopLD, mErrorLD);
     }
 
     public LiveData<List<WarDeeVO>> getWarDeeLD() {
         return mWarDeeLD;
     }
+
+
 }

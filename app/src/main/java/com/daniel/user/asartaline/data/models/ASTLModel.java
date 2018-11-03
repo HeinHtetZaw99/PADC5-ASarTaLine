@@ -229,4 +229,8 @@ public class ASTLModel extends BaseModel {
         return warDeeVO;
     }
 
+    public void getSuggestedFoodsById(final String foodId) {
+
+    }
+
 }

@@ -2,9 +2,14 @@ package com.daniel.user.asartaline.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,14 +42,19 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.vp_empty_news)
     EmptyViewPod emptyViewPod;
 
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this, this);
 
+
         mPresenter = ViewModelProviders.of(this).get(MainPresenter.class);
         mPresenter.initPresenter(this);
+        checkConnection();
 
         rvFood.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new FoodAdapter(this, mPresenter);
@@ -54,23 +64,35 @@ public class MainActivity extends AppCompatActivity implements MainView {
             @Override
             public void onListEndReach() {
                 //Snackbar.make(rvNews, "This is all the data for NOW.", Snackbar.LENGTH_LONG).show();
-                //TODO load more data.
+                showSnackBar("This is all the data for now ");
             }
         });
         rvFood.addOnScrollListener(mSmartScrollListener);
 
-        mPresenter.getWarDeeLD().observe(this, new Observer<List<WarDeeVO>>() {
-            @Override
-            public void onChanged(@Nullable List<WarDeeVO> warDeeVOS) {
-                Log.d(ASarTaLineApp.LOG_TAG, "Livedata reached");
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        if (isOnline()) {
+                            rvFood.removeAllViews();
+                            refreshFeed();
+                        } else {
+                            showSnackBar("NO NETWORK CONNECTIONS");
+                        }
+                    }
+                }
+        );
 
-                displayData(warDeeVOS);
-            }
-        });
 
         if (mSearchPanel.isAttachedToWindow()) {
             mSearchPanel.setCardBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         }
+    }
+
+
+    private void refreshFeed() {
+        swipeRefreshLayout.setRefreshing(false);
+        mPresenter.onRefreshScreen();
     }
 
     private void displayData(List<WarDeeVO> warDeeVOList) {
@@ -82,5 +104,34 @@ public class MainActivity extends AppCompatActivity implements MainView {
         Intent intent = new Intent(MainActivity.this, FoodDetailsActivity.class);
         intent.putExtra("Id", id);
         startActivity(intent);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
+
+    }
+
+    public void checkConnection() {
+        if (isOnline()) {
+
+            mPresenter.getWarDeeLD().observe(this, new Observer<List<WarDeeVO>>() {
+                @Override
+                public void onChanged(@Nullable List<WarDeeVO> warDeeVOS) {
+                    Log.d(ASarTaLineApp.LOG_TAG, "Livedata reached");
+
+                    displayData(warDeeVOS);
+                }
+            });
+
+        } else {
+            showSnackBar("NO NETWORK CONNECTIONS");
+        }
+    }
+
+
+    private void showSnackBar(String s) {
+        Snackbar.make(rvFood, s, Snackbar.LENGTH_INDEFINITE).show();
     }
 }
